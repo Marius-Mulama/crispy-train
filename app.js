@@ -43,12 +43,12 @@ app.use(passport.session())
 
 //Routes
 const authRoute = require("./api/v1/routes/auth")
-
-
+const companyRoute = require("./api/v1/routes/companies")
 
 
 //Others
 app.use("/auth", authRoute);
+app.use("/companies", companyRoute);
 
 
 app.use('*',(req,res)=>{
