@@ -44,11 +44,13 @@ app.use(passport.session())
 //Routes
 const authRoute = require("./api/v1/routes/auth")
 const companyRoute = require("./api/v1/routes/companies")
+const jobsRoute = require("./api/v1/routes/jobs");
 
 
 //Others
 app.use("/auth", authRoute);
 app.use("/companies", companyRoute);
+app.use("/jobs", jobsRoute)
 
 
 app.use('*',(req,res)=>{
