@@ -2,6 +2,10 @@ const express = require("express")
 const router = express.Router()
 const passport = require("passport")
 
+
+//Import Accounts Conrtoller
+const AccountsController = require("../controllers/accounts");
+
 const CLIENT_URL = "http://localhost:3000/"
 
 
@@ -39,5 +43,12 @@ router.get("/google/callback", passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed"
 }))
+
+//From here holds routes for non social logins
+
+router.post("/login", AccountsController.login);
+
+
+router.post("/signup", AccountsController.signup)
 
 module.exports = router;
