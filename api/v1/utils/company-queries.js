@@ -1,4 +1,4 @@
-//Holds all the SQL queries for everything in the api
+//Holds all the SQL queries for everything involving companies in the api
 
 const viewAllCompanies = "SELECT * FROM companies LIMIT 20";
 const viewSingleCompany = "SELECT * FROM companies WHERE uuid = $1"

@@ -12,9 +12,11 @@ const companies_get_all = (req,res)=>{
 
         //console.log(results.rows)
 
+        console.log(results)
+
         res.status(200).json({
             count: results.rows.length,
-            results: results.rows
+            results: results.rows.rows[0]
         });
     });
 }
