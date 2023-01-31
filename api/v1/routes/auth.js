@@ -6,7 +6,7 @@ const passport = require("passport")
 //Import Accounts Conrtoller
 const AccountsController = require("../controllers/accounts");
 
-const CLIENT_URL = "http://localhost:3000/"
+const CLIENT_URL = "https://talents-pool.netlify.app/"
 
 
 router.get("/login/success",(req,res)=>{
