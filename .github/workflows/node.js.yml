@@ -34,10 +34,11 @@ jobs:
  
     steps:
       - name: Create .env file
-        uses: ozaytsev86/create-env-file@v1
-        with:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET_ID: ${{ secrets.GOOGLE_CLIENT_SECRET_ID }}
+        run: |
+          touch .env
+          echo GOOGLE_CLIENT_ID = ${{ secrets.GOOGLE_CLIENT_ID }} >> .env
+          echo GOOGLE_CLIENT_SECRET_ID = ${{ secrets.GOOGLE_CLIENT_SECRET_ID }} >> .env
+          cat .env
 
 
   run-app:
