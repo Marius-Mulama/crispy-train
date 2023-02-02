@@ -26,5 +26,31 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+
+
+# create-env:
+#    needs: build
+#     steps:
+#     - run: pm2 restart TalentPool
+
+
+  create-envfile:
+ 
+    runs-on: self-hosted
+ 
+    steps:
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_SOME_API_KEY: "123456abcdef"
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }
+        GOOGLE_CLIENT_SECRET_ID: ${{ secrets.GOOGLE_CLIENT_SECRET_ID }}
+        file_name: .env
+        fail_on_empty: false
+
+  run-app:
+   needs: create-envfile
+   runs-on: self-hosted
+    steps:
     - run: pm2 restart TalentPool
    # - run: npm test --if-present
