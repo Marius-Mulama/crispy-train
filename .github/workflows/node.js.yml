@@ -43,7 +43,7 @@ jobs:
         fail_on_empty: false
 
   run-app:
-   needs: create-envfile
+    runs-on: self-hosted
     steps:
     - run: pm2 restart TalentPool
    # - run: npm test --if-present
