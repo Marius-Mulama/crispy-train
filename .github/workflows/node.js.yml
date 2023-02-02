@@ -36,7 +36,6 @@ jobs:
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
         with:
-        envkey_SOME_API_KEY: "123456abcdef"
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET_ID: ${{ secrets.GOOGLE_CLIENT_SECRET_ID }}
         file_name: .env
