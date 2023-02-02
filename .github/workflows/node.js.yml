@@ -28,12 +28,6 @@ jobs:
     - run: npm run build --if-present
 
 
-# create-env:
-#    needs: build
-#     steps:
-#     - run: pm2 restart TalentPool
-
-
   create-envfile:
  
     runs-on: self-hosted
@@ -50,7 +44,6 @@ jobs:
 
   run-app:
    needs: create-envfile
-   runs-on: self-hosted
     steps:
     - run: pm2 restart TalentPool
    # - run: npm test --if-present
