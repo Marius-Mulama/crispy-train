@@ -52,7 +52,7 @@ jobs:
 
   run-app:
     runs-on: self-hosted
-    needs: create-envfile
+    needs: build
 
     steps:
       - run: pm2 restart TalentPool
