@@ -31,10 +31,12 @@ jobs:
   create-envfile:
  
     runs-on: self-hosted
+    needs: build
  
     steps:
       - name: Create .env file
         run: |
+          echo pwd
           touch .env
           echo GOOGLE_CLIENT_ID = ${{ secrets.GOOGLE_CLIENT_ID }} >> .env
           echo GOOGLE_CLIENT_SECRET_ID = ${{ secrets.GOOGLE_CLIENT_SECRET_ID }} >> .env
@@ -43,6 +45,8 @@ jobs:
 
   run-app:
     runs-on: self-hosted
+    needs: create-envfile
+
     steps:
-    - run: pm2 restart TalentPool
+      - run: pm2 restart TalentPool
    # - run: npm test --if-present
