@@ -6,7 +6,7 @@ const passport = require("passport")
 //Import Accounts Conrtoller
 const AccountsController = require("../controllers/accounts");
 
-const CLIENT_URL = "https://talents-pool.netlify.app"
+const CLIENT_URL = "https://localhost:3000"
 
 
 router.get("/login/success",(req,res)=>{
@@ -49,6 +49,8 @@ router.get("/google/callback", passport.authenticate("google", {
 router.post("/login", AccountsController.login);
 
 
-router.post("/signup", AccountsController.signup)
+router.post("/signup", AccountsController.signup);
+
+router.patch("/password", AccountsController.changePassword);
 
 module.exports = router;
