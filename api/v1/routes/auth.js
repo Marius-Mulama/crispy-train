@@ -3,10 +3,10 @@ const router = express.Router()
 const passport = require("passport")
 
 
-//Import Accounts Conrtoller
-const AccountsController = require("../controllers/accounts");
+//Import Auth Conrtoller
+const AccountsController = require("../controllers/auth");
 
-const CLIENT_URL = "https://localhost:3000"
+const CLIENT_URL = "http://localhost:3000"
 
 
 router.get("/login/success",(req,res)=>{
