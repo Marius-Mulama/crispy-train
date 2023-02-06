@@ -2,7 +2,7 @@ const pool = require("../utils/db-connection")
 const queries = require("../utils/company-queries")
 
 
-const companies_get_all = (req,res)=>{
+const companies_get_all = (req,res,next)=>{
     pool.query(queries.viewAllCompanies,[], (error,results)=>{
         if(error){
             return res.status(500).json({
@@ -14,17 +14,17 @@ const companies_get_all = (req,res)=>{
 
         console.log(results)
 
-        res.status(200).json({
+        return res.status(200).json({
             count: results.rows.length,
-            results: results.rows.rows[0]
+            results: results.rows
         });
     });
 }
 
 const companies_get_one = (req,res)=>{
-    const companyUuid = req.params.uuid
+    const slug = req.params.slug
 
-    pool.query(queries.viewSingleCompany,[companyUuid],(error, results)=>{
+    pool.query(queries.viewSingleCompany,[slug],(error, results)=>{
         if(error){
             return res.status(500).json({
                 message: "An Error Occured"
@@ -35,7 +35,7 @@ const companies_get_one = (req,res)=>{
 
         return res.status(200).json({
             count: results.rows.length,
-            results: results.rows
+            result: results.rows[0]
         })
 
     })
@@ -53,20 +53,27 @@ const create_company = (req,res)=>{
     const name = req.body.name
     const description = req.body.description;
     const location = req.body.location
-    const website = req.body.website
+    const website = String(req.body.website)
 
     pool.query(queries.createCompany,[name,description,location,website],(error, results)=>{
         if(error){
+            let infoMessage = "Error Occured"
+
+            if(error.code == "23505"){
+                infoMessage = "A company with the same name already exists";
+            }
+
+            //console.log(error.detail)
             return res.status(500).json({
-                message:"error Occured",
-                error:error
+                message:infoMessage,
+                //error:error
             })
         }
 
 
         res.status(201).json({
             message:"Created Succesfully",
-            result:results
+            //result:results
         })
     })
 

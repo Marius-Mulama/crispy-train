@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router()
 
+const checkAuth = require("../utils/check-auth");
+
 
 //Import Controller
 const CompanyController = require("../controllers/companies")
 
 
-router.get("/", CompanyController.companies_get_all);
+router.get("/",checkAuth, CompanyController.companies_get_all);
 
-router.get("/:id", CompanyController.companies_get_one);
+router.get("/:slug", CompanyController.companies_get_one);
 
 router.get("/:id/jobs", CompanyController.companies_get_jobs);
 
