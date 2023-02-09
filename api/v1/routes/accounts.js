@@ -4,6 +4,7 @@ const router = express.Router()
 
 //Import Accounts Conrtoller
 const AccountsController = require("../controllers/accounts");
+const checkAuth = require("../utils/check-auth");
 
 
 router.get("/", (req,res)=>{
@@ -14,6 +15,15 @@ router.get("/", (req,res)=>{
 
 router.get("/:slug", AccountsController.viewProfile);
 
-router.get("/update", AccountsController.updateProfile);
+router.get("/my-profile",checkAuth, AccountsController.viewProfile);
+
+router.patch("/update",checkAuth, AccountsController.updateProfile);
+
+router.post("/experience",checkAuth, AccountsController.addExperience)
+
+router.patch("/experience",checkAuth, AccountsController.updateExperience)
+
+
+//router.get("experince", checkAuth, AccountsController.viewExperience)
 
 module.exports = router;
