@@ -97,6 +97,7 @@ const changePassword = (req, res) => {
 function generateJWT(data){
   const token = jwt.sign(
     {
+      id: data.id,
       email: data.email,
       identifier: data.uuid,
       verified: data.verified,
