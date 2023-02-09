@@ -17,6 +17,24 @@ function checksignup(email, password){
 
 }
 
+
+function checkExperience(position, company, start_date , location){
+    let issues = "";
+
+    if(!position){
+        issues = "Position Field is empty"
+    }else if(!company){
+        issues = "Position Field is empty"
+    }else if(!start_date){
+        issues = "Start Date is empty"
+    }else if(!location){
+        issues = "Location Field is empty"
+    }
+
+    return issues;
+}
+
 module.exports={
     checksignup,
+    checkExperience,
 }
