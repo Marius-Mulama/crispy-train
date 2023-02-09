@@ -1,12 +1,23 @@
-const createUserWithPass = "INSERT INTO users (email, password) VALUES ($1, crypt($2, gen_salt('md5')))";
-const changePassword = "UPDATE users SET password = crypt('$2', gen_salt('md5')) where email = $1";
-const createUserWithoutPass = "INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)";
-const login = "SELECT *, CONCAT(first_name,' ', last_name) AS full_name FROM users WHERE email = $1 AND password = crypt($2, password)";
+const createUserWithPass =
+  "INSERT INTO users (email, password) VALUES ($1, crypt($2, gen_salt('md5')))";
+const changePassword =
+  "UPDATE users SET password = crypt('$2', gen_salt('md5')) where email = $1";
+const createUserWithoutPass =
+  "INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)";
+const login =
+  "SELECT *, CONCAT(first_name,' ', last_name) AS full_name FROM users WHERE email = $1 AND password = crypt($2, password)";
 const checkIfExists = "SELECT * FROM users WHERE email = $1";
 
+const addExperience =
+  "INSERT INTO experience(user_id, position, company,description, start_date, end_date , location)VALUES ($1, $2,$3,$4, to_date($5, 'DD-MM-YYYY'),to_date($6, 'DD-MM-YYYY'), $7)";
+
+const updateExperience = "UPDATE experience SET position=$1, company=$2,description=$3, start_date=$4, end_date=$5 , location=$6 WHERE id=$7 AND user_id=$8";
+
 module.exports = {
-    createUserWithPass,
-    createUserWithoutPass,
-    login,
-    checkIfExists
-}
+  createUserWithPass,
+  createUserWithoutPass,
+  login,
+  checkIfExists,
+  addExperience,
+  updateExperience,
+};
