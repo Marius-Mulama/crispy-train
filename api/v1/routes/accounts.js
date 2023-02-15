@@ -25,6 +25,8 @@ router.patch("/experience",checkAuth, AccountsController.updateExperience)
 
 router.get("/myprofile",checkAuth, AccountsController.getMyProfile);
 
+router.patch("/roles", checkAuth,AccountsController.updateRole);
+
 
 //router.get("experince", checkAuth, AccountsController.viewExperience)
 

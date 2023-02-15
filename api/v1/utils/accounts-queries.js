@@ -1,11 +1,15 @@
 const createUserWithPass =
   "INSERT INTO users (email, password) VALUES ($1, crypt($2, gen_salt('md5')))";
+  
 const changePassword =
   "UPDATE users SET password = crypt('$2', gen_salt('md5')) where email = $1";
+
 const createUserWithoutPass =
   "INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)";
+
 const login =
   "SELECT *, CONCAT(first_name,' ', last_name) AS full_name FROM users WHERE email = $1 AND password = crypt($2, password)";
+
 const checkIfExists = "SELECT * FROM users WHERE email = $1";
 
 const addExperience =
@@ -13,6 +17,8 @@ const addExperience =
 
 const updateExperience =
   "UPDATE experience SET position=$1, company=$2,description=$3, start_date=$4, end_date=$5 , location=$6 WHERE id=$7 AND user_id=$8";
+
+const changeRole = "UPDATE public.users SET role=$1 WHERE email=$2";
 
 const getMyProfile =
   " select users.id, first_name ||' '|| last_name as fullname, email, slug, position, description, company, location, start_date, end_date from users LEFT JOIN experience ON users.id = experience.user_id WHERE user_id = $1 ORDER BY start_date ASC ";
@@ -24,5 +30,6 @@ module.exports = {
   checkIfExists,
   addExperience,
   updateExperience,
+  changeRole,
   getMyProfile,
 };

@@ -171,12 +171,67 @@ const getMyProfile = (req,res)=>{
 
 }
 
+const updateRole = (req,res)=>{
+  //Check  if data is coming from  admin account
+  if(!isAdminus(req.headers.authorization.split(" ")[1])){
+    return res.status(403).json({
+      error:"You dont have the facilities for that"
+    })
+  }
+
+
+  const email = req.body.email;
+  const tier = req.body.tier;
+
+  let role = "";
+
+  if(tier === 1){
+    role = "Adminus"
+  }else if(tier === 2){
+    role = "Company"
+  }else{
+    role = "User"
+  }
+
+pool.query(queries.changeRole,[role, email], (error, result) => {
+  if (error) {
+
+    return res.status(500).json({
+      error:error
+    });
+  }
+
+  if(result){
+    const resultJson = result.rows;
+
+    return res.status(201).json({
+      message: "Role updated",
+      result: resultJson,
+    });
+
+  }
+});
+
+}
+
 
 function getUserId(webtoken){
   let token = webtoken;
   let decoded = jwt.verify(token, process.env.JWT_KEY);
 
   return decoded.id;
+}
+
+function isAdminus(webtoken){
+  let token = webtoken;
+  let decoded = jwt.verify(token, process.env.JWT_KEY);
+
+  if(decoded.role === "User" || decoded.role ==='Company' ){
+    return false;
+  }
+
+  return true;
+
 }
 
 //TODO Add function to vaildate dates
@@ -187,4 +242,5 @@ module.exports = {
   addExperience,
   updateExperience,
   getMyProfile,
+  updateRole,
 };
