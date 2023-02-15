@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const queries = require("../utils/accounts-queries");
 const pool = require("../utils/db-connection");
@@ -17,13 +17,13 @@ const login = (req, res) => {
     }
 
     if (result.rows.length === 1) {
-      const token = generateJWT(result.rows[0])
-    
+      const token = generateJWT(result.rows[0]);
+
       //console.log(result);
       res.status(200).json({
         message: "Succesful Login",
         result: result.rows[0],
-        token: token
+        token: token,
       });
     }
 
@@ -49,10 +49,16 @@ const signup = (req, res) => {
 
   pool.query(queries.createUserWithPass, [email, password], (error, result) => {
     if (error) {
-      return res.status(500).json({
-        message: "An error Ocuured",
-        error: error,
-      });
+      if (error.code === "23505") {
+        return res.status(500).json({
+          message: "A user with this email already exists",
+        });
+      } else {
+        return res.status(500).json({
+          message: "An error Ocuured",
+          error: error,
+        });
+      }
     }
 
     if (result) {
@@ -86,32 +92,31 @@ const changePassword = (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: "PAssword was updated succesfully",
+        message: "Password was updated succesfully",
         result: result.rowCount,
       });
     }
   });
 };
 
-
-function generateJWT(data){
+function generateJWT(data, role) {
   const token = jwt.sign(
     {
       id: data.id,
       email: data.email,
       identifier: data.uuid,
+      role: data.role,
       verified: data.verified,
-      fullname: data.full_name
+      fullname: data.full_name,
     },
     process.env.JWT_KEY,
     {
       expiresIn: "720h",
-    } 
-    );
+    }
+  );
 
-    return token
+  return token;
 }
-
 
 module.exports = {
   login,
