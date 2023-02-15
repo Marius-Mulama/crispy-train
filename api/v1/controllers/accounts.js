@@ -99,8 +99,6 @@ const updateExperience = (req, res) => {
     });
   }
 
-  // UPDATE experience SET position=$1, company=$2,description=$3, 
-  // start_date=$4, end_date=$5 , location=$6 WHERE id=$7 AND user_id =$8 "
 
   pool.query(
     queries.updateExperience,
@@ -125,6 +123,54 @@ const updateExperience = (req, res) => {
   );
 };
 
+const getMyProfile = (req,res)=>{
+  const user_id = getUserId(req.headers.authorization.split(" ")[1]);
+
+
+  pool.query(
+    queries.getMyProfile,
+    [user_id],
+    (error, result) => {
+      if (error) {
+        let infoMessage = "Error Occured";
+
+        console.log(error)
+
+        return res.status(500).json({
+          message: infoMessage,
+          //error:error
+        });
+      }
+
+      if(result){
+        const resultJson = result.rows;
+
+        return res.status(200).json({
+          full_name:resultJson[0].fullname,
+          email:resultJson[0].email,
+          slug:resultJson[0].slug,
+          experience:result.rows.map((resultJson)=>{
+            return {
+              "company":resultJson.company,
+              "position":resultJson.position,
+              "description":resultJson.description,
+              "location": resultJson.location,
+              "start":resultJson.start_date,
+              "end":resultJson.end_date
+            }
+  
+          })
+  
+          //result: result.rows,
+        });
+
+      }
+    }
+  );
+
+
+}
+
 
 function getUserId(webtoken){
   let token = webtoken;
@@ -140,4 +186,5 @@ module.exports = {
   updateProfile,
   addExperience,
   updateExperience,
+  getMyProfile,
 };

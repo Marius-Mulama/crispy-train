@@ -13,7 +13,7 @@ router.get("/", (req,res)=>{
     })
 });
 
-router.get("/:slug", AccountsController.viewProfile);
+//router.get("/:slug", AccountsController.viewProfile);
 
 router.get("/my-profile",checkAuth, AccountsController.viewProfile);
 
@@ -22,6 +22,8 @@ router.patch("/update",checkAuth, AccountsController.updateProfile);
 router.post("/experience",checkAuth, AccountsController.addExperience)
 
 router.patch("/experience",checkAuth, AccountsController.updateExperience)
+
+router.get("/myprofile",checkAuth, AccountsController.getMyProfile);
 
 
 //router.get("experince", checkAuth, AccountsController.viewExperience)
