@@ -66,7 +66,7 @@ const create_company = (req,res)=>{
             //console.log(error.detail)
             return res.status(500).json({
                 message:infoMessage,
-                //error:error
+                error:error
             })
         }
 
