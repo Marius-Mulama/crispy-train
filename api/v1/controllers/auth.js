@@ -4,6 +4,7 @@ const queries = require("../utils/accounts-queries");
 const pool = require("../utils/db-connection");
 const { checksignup } = require("../utils/do-checks");
 
+
 const login = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -78,11 +79,30 @@ const signup = (req, res) => {
   });
 };
 
+
 const changePassword = (req, res) => {
+  const decoded = getUserId(req.headers.authorization.split(" ")[1]);
+  //console.log(decoded);
+  const user_id = parseInt(decoded[0])
+  const decoded_email = decoded[1];
   const email = req.body.email;
   const password = req.body.password;
 
-  pool.query(queries.changePassword, [email, password], (error, result) => {
+  const issues = checksignup(email, password);
+
+  if (issues.length > 0) {
+    return res.status(409).json({
+      message: issues,
+    });
+  }
+
+  if(decoded_email !== email){
+    return res.status(403).json({
+      message: "Forbiden Operation"
+    });
+  }
+
+  pool.query(queries.changePassword, [password,email, user_id], (error, result) => {
     if (error) {
       return res.status(409).json({
         message: "Error Occured while updating password try again",
@@ -116,6 +136,13 @@ function generateJWT(data, role) {
   );
 
   return token;
+}
+
+function getUserId(webtoken){
+  let token = webtoken;
+  let decoded = jwt.verify(token, process.env.JWT_KEY);
+
+  return [decoded.id, decoded.email];
 }
 
 module.exports = {

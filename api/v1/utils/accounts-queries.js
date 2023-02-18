@@ -2,7 +2,7 @@ const createUserWithPass =
   "INSERT INTO users (email, password) VALUES ($1, crypt($2, gen_salt('md5')))";
   
 const changePassword =
-  "UPDATE users SET password = crypt('$2', gen_salt('md5')) where email = $1";
+  "UPDATE users SET password=crypt($1, gen_salt('md5')) WHERE email=$2 AND id=$3";
 
 const createUserWithoutPass =
   "INSERT INTO users (first_name, last_name, email) VALUES ($1, $2, $3)";

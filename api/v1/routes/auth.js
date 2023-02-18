@@ -5,6 +5,7 @@ const passport = require("passport")
 
 //Import Auth Conrtoller
 const AccountsController = require("../controllers/auth");
+const checkAuth = require("../utils/check-auth");
 
 const CLIENT_URL = "http://localhost:3000"
 
@@ -51,6 +52,6 @@ router.post("/login", AccountsController.login);
 
 router.post("/signup", AccountsController.signup);
 
-router.patch("/password", AccountsController.changePassword);
+router.patch("/password",checkAuth, AccountsController.changePassword);
 
 module.exports = router;
