@@ -1,23 +1,66 @@
 const jwt = require("jsonwebtoken");
+const { Pool } = require("pg");
 
 const queries = require("../utils/accounts-queries");
 const pool = require("../utils/db-connection");
 const { checkExperience } = require("../utils/do-checks");
 
 //TODO
-
 const viewProfile = (req, res) => {
   res.status(200).json({
     message: `View User Profile for user ${req.params.slug}`,
   });
 };
 
-//TODO
 const updateProfile = (req, res) => {
-  res.status(200).json({
-    message: "Update User Profile",
-  });
+  const user_id = getUserId(req.headers.authorization.split(" ")[1]);
+  const first_name = req.body.firstname;
+  const last_name = req.body.lastname;
+
+  if(!first_name.trim()){
+    return res.status(401).json({
+      error: "Input Error",
+      message: "First Name is Mandatory",
+    });
+  }
+
+
+  pool.query(queries.updateProfile,
+    [first_name, last_name, user_id],
+    (error,result)=>{
+      if (error) {
+        let infoMessage = "Error Occured";
+
+        console.log(error)
+
+        return res.status(500).json({
+          message: infoMessage,
+          error:error
+        });
+      }
+
+      return res.status(201).json({
+        message: "Profile Updated Sucessfully",
+        result: result,
+      });
+    }
+    )
+
 };
+
+//TODO
+const updateEmail = (req,res)=>{
+  res.status(200).json({
+    message: "Update User Email",
+  });
+}
+
+//TODO
+const addProfilePic = (req,res)=>{
+  res.status(200).json({
+    message: "Add or Update Profile Picture",
+  });
+}
 
 const addExperience = (req, res) => {
 
@@ -243,4 +286,6 @@ module.exports = {
   updateExperience,
   getMyProfile,
   updateRole,
+  updateEmail,
+  addProfilePic,
 };

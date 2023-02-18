@@ -13,7 +13,6 @@ router.get("/", (req,res)=>{
     })
 });
 
-//router.get("/:slug", AccountsController.viewProfile);
 
 router.get("/my-profile",checkAuth, AccountsController.viewProfile);
 

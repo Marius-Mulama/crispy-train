@@ -23,6 +23,8 @@ const changeRole = "UPDATE public.users SET role=$1 WHERE email=$2";
 const getMyProfile =
   " select users.id, first_name ||' '|| last_name as fullname, email, slug, position, description, company, location, start_date, end_date from users LEFT JOIN experience ON users.id = experience.user_id WHERE user_id = $1 ORDER BY start_date ASC ";
 
+const updateProfile = "UPDATE users SET first_name=$1, last_name=$2 WHERE id=$3;"
+
 module.exports = {
   createUserWithPass,
   createUserWithoutPass,
@@ -32,4 +34,6 @@ module.exports = {
   updateExperience,
   changeRole,
   getMyProfile,
+  updateProfile,
+  changePassword,
 };
