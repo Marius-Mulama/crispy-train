@@ -98,7 +98,7 @@ const changePassword = (req, res) => {
 
   if(decoded_email !== email){
     return res.status(403).json({
-      message: "Forbiden Operation"
+      message: "Forbiden Operation trying to change another account password"
     });
   }
 
