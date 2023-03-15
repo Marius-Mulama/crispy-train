@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
 
-const queries = require("../utils/accounts-queries");
-const pool = require("../utils/db-connection");
+const queries = require("../utils/database/accounts-queries");
+const pool = require("../utils/database/db-connection");
 const { checkExperience } = require("../utils/do-checks");
 
 //TODO
@@ -276,8 +276,6 @@ function isAdminus(webtoken){
   return true;
 
 }
-
-//TODO Add function to vaildate dates
 
 module.exports = {
   viewProfile,
