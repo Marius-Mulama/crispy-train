@@ -3,7 +3,7 @@ const { Pool } = require("pg");
 
 const queries = require("../utils/database/accounts-queries");
 const pool = require("../utils/database/db-connection");
-const { checkExperience } = require("../utils/do-checks");
+const { checkExperience } = require("../utils/checks/do-checks");
 
 //TODO
 const viewProfile = (req, res) => {

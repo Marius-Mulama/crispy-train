@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const queries = require("../utils/accounts-queries");
-const pool = require("../utils/db-connection");
-const { checksignup } = require("../utils/do-checks");
+const queries = require("../utils/database/accounts-queries");
+const pool = require("../utils/database/db-connection");
+const { checksignup } = require("../utils/checks/do-checks");
 
 
 const login = (req, res) => {
