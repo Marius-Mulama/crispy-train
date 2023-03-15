@@ -5,7 +5,7 @@ const passport = require("passport")
 
 //Import Auth Conrtoller
 const AccountsController = require("../controllers/auth");
-const checkAuth = require("../utils/check-auth");
+const checkAuth = require("../utils/checks/check-auth");
 
 const CLIENT_URL = "http://localhost:3000"
 

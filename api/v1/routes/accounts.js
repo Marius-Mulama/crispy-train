@@ -4,7 +4,7 @@ const router = express.Router()
 
 //Import Accounts Conrtoller
 const AccountsController = require("../controllers/accounts");
-const checkAuth = require("../utils/check-auth");
+const checkAuth = require("../utils/checks/check-auth");
 
 
 router.get("/", (req,res)=>{

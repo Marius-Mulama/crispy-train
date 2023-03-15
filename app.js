@@ -50,7 +50,7 @@ const authRoute = require("./api/v1/routes/auth");
 const companyRoute = require("./api/v1/routes/companies");
 const jobsRoute = require("./api/v1/routes/jobs");
 const accountsRoute = require("./api/v1/routes/accounts");
-const pool = require("./api/v1/utils/db-connection");
+const pool = require("./api/v1/utils/database/db-connection");
 
 //Others
 app.use("/auth", authRoute);

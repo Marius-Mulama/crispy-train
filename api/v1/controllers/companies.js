@@ -1,5 +1,5 @@
-const pool = require("../utils/db-connection")
-const queries = require("../utils/company-queries")
+const pool = require("../utils/database/db-connection")
+const queries = require("../utils/database/company-queries")
 
 
 const companies_get_all = (req,res,next)=>{
@@ -79,6 +79,7 @@ const create_company = (req,res)=>{
 
 }
 
+//TODO Modify Company
 const modify_company = (req,res)=>{
     return res.status(200).json({
         message:"Modify company"

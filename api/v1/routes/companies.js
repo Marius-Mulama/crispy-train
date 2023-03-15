@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router()
 
-const checkAuth = require("../utils/check-auth");
+const checkAuth = require("../utils/checks/check-auth");
 
 
 //Import Controller
