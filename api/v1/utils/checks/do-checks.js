@@ -21,13 +21,13 @@ function checksignup(email, password){
 function checkExperience(position, company, start_date , location){
     let issues = "";
 
-    if(!position || !position.strip){
+    if(!position || !position.trim()){
         issues = "Position Field is empty"
-    }else if(!company || !company.strip){
+    }else if(!company || !company.trim()){
         issues = "Position Field is empty"
-    }else if(!start_date || !start_date.strip){
+    }else if(!start_date || !start_date.trim()){
         issues = "Start Date is empty"
-    }else if(!location || !location.strip){
+    }else if(!location || !location.trim()){
         issues = "Location Field is empty"
     }
 
