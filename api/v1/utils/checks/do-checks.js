@@ -34,7 +34,28 @@ function checkExperience(position, company, start_date , location){
     return issues;
 }
 
+
+function checkProject(title, description, link){
+    let issues = "";
+
+    if(!title || !title.trim()){
+        issues = "Title Field is empty"
+    }else if(!description || !description.trim()){
+        issues = "Description Field is empty"
+    }
+
+    
+    try{
+        let url = new URL(link)
+    }catch(_){
+        issues = "Invalid URL LINK"
+    }
+
+    return issues;
+}
+
 module.exports={
     checksignup,
     checkExperience,
+    checkProject,
 }
