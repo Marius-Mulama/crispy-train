@@ -50,6 +50,7 @@ const authRoute = require("./api/v1/routes/auth");
 const companyRoute = require("./api/v1/routes/companies");
 const jobsRoute = require("./api/v1/routes/jobs");
 const accountsRoute = require("./api/v1/routes/accounts");
+const projectsRoute = require("./api/v1/routes/projects")
 const pool = require("./api/v1/utils/database/db-connection");
 
 //Others
@@ -57,6 +58,7 @@ app.use("/auth", authRoute);
 app.use("/companies", companyRoute);
 app.use("/jobs", jobsRoute);
 app.use("/accounts", accountsRoute)
+app.use("/projects",projectsRoute)
 
 app.use("/testdb", (req, res) => {
   pool
