@@ -2,7 +2,7 @@
 
 const viewAllCompanies = "SELECT * FROM companies LIMIT 20";
 const viewSingleCompany = "SELECT * FROM companies WHERE slug = $1"
-const createCompany = "INSERT INTO companies(name, description, location, website) VALUES ($1, $2, $3, $4)";
+const createCompany = "INSERT INTO companies(name, description, location, website, created_by) VALUES ($1, $2, $3, $4, $5)";
 
 
 module.exports = {
