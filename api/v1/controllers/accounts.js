@@ -1,9 +1,14 @@
 const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
+const multer  = require('multer')
+
 
 const queries = require("../utils/database/accounts-queries");
 const pool = require("../utils/database/db-connection");
 const { checkExperience } = require("../utils/checks/do-checks");
+
+
+
 
 //TODO
 const viewProfile = (req, res) => {
@@ -56,9 +61,19 @@ const updateEmail = (req,res)=>{
 }
 
 //TODO
-const addProfilePic = (req,res)=>{
+const addProfilePic = (req,res,next)=>{
+
+  if(!req.file){
+    return res.status(400).json({
+      message:"Please Upload your file"
+    })
+
+  }
+
+  console.log(req.file.path)
+
   res.status(200).json({
-    message: "Add or Update Profile Picture",
+    message: "Update Profile Picture Success",
   });
 }
 

@@ -18,6 +18,9 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(morgan("dev"));
 
+
+app.use('/uploads' ,express.static('uploads'))
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 dotenv.config();
 
