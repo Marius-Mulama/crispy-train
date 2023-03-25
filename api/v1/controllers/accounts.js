@@ -70,10 +70,10 @@ const addProfilePic = (req,res,next)=>{
 
   }
 
-  console.log(req.file.path)
 
   res.status(200).json({
     message: "Update Profile Picture Success",
+    location: `${process.env.MAINS}/uploads/profiles/${req.file.filename} `
   });
 }
 
