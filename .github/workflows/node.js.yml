@@ -37,6 +37,8 @@ jobs:
           echo POSTGRES_DB = ${{ secrets.POSTGRES_DB}} >> .env
           echo POSTGRES_PORT = ${{ secrets.POSTGRES_PORT }} >> .env
           echo JWT_KEY = ${{ secrets.JWT_KEY }} >> .env
+
+          echo MAINS = ${{ secrets.MAINS }} >> .env
           cat .env
 
 
