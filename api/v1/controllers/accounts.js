@@ -97,12 +97,6 @@ const addProfilePic = (req,res,next)=>{
   )
 
 
-
-
-  // res.status(200).json({
-  //   message: "Update Profile Picture Success",
-  //   location: `${process.env.MAINS}/uploads/profiles/${req.file.filename} `
-  // });
 }
 
 const addExperience = (req, res) => {
