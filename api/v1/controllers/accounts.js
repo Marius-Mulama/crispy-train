@@ -60,7 +60,7 @@ const updateEmail = (req,res)=>{
   });
 }
 
-//TODO
+
 const addProfilePic = (req,res,next)=>{
 
   const user_id = getUserId(req.headers.authorization.split(" ")[1]);
@@ -231,10 +231,12 @@ const getMyProfile = (req,res)=>{
       if(result){
         const resultJson = result.rows;
 
+
         return res.status(200).json({
           full_name:resultJson[0].fullname,
           email:resultJson[0].email,
           slug:resultJson[0].slug,
+          profile_image:`${process.env.MAINS}/uploads/profiles/${resultJson[0].profile_image}`,
           experience:result.rows.map((resultJson)=>{
             return {
               "company":resultJson.company,
