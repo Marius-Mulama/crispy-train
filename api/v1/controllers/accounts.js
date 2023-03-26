@@ -63,6 +63,7 @@ const updateEmail = (req,res)=>{
 //TODO
 const addProfilePic = (req,res,next)=>{
 
+  const user_id = getUserId(req.headers.authorization.split(" ")[1]);
   if(!req.file){
     return res.status(400).json({
       message:"Please Upload your file"
@@ -70,11 +71,38 @@ const addProfilePic = (req,res,next)=>{
 
   }
 
+  const imageName = req.file.filename
 
-  res.status(200).json({
-    message: "Update Profile Picture Success",
-    location: `${process.env.MAINS}/uploads/profiles/${req.file.filename} `
-  });
+  pool.query(queries.updateProfilePic,[imageName,user_id],
+
+    (error,result)=>{
+      if (error) {
+        let infoMessage = "Error Occured when writting filename";
+
+        //console.log(error)
+
+        return res.status(500).json({
+          message: infoMessage,
+          error:error
+        });
+      }
+
+      return res.status(201).json({
+        message: "Profile Picture Updated Sucessfully",
+        url: `${process.env.MAINS}/uploads/profiles/${req.file.filename}`,
+        result: result
+      });
+    }
+
+  )
+
+
+
+
+  // res.status(200).json({
+  //   message: "Update Profile Picture Success",
+  //   location: `${process.env.MAINS}/uploads/profiles/${req.file.filename} `
+  // });
 }
 
 const addExperience = (req, res) => {

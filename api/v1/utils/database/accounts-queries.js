@@ -25,6 +25,9 @@ const getMyProfile =
 
 const updateProfile = "UPDATE users SET first_name=$1, last_name=$2 WHERE id=$3;"
 
+
+const updateProfilePic = "UPDATE users SET profile_image=$1 where id=$2"
+
 module.exports = {
   createUserWithPass,
   createUserWithoutPass,
@@ -35,5 +38,6 @@ module.exports = {
   changeRole,
   getMyProfile,
   updateProfile,
+  updateProfilePic,
   changePassword,
 };
