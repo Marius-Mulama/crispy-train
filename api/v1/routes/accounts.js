@@ -30,7 +30,7 @@ router.patch("/roles", checkAuth,AccountsController.updateRole);
 
 
 //TODO Find a fix for this
-router.patch("/upload",imageUpload, AccountsController.addProfilePic);
+router.patch("/upload",checkAuth,imageUpload, AccountsController.addProfilePic);
 
 
 //router.get("experince", checkAuth, AccountsController.viewExperience)
