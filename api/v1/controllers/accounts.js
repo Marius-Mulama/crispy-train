@@ -224,7 +224,7 @@ const getMyProfile = (req,res)=>{
 
         return res.status(500).json({
           message: infoMessage,
-          //error:error
+          error:error
         });
       }
 
