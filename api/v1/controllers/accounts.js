@@ -228,7 +228,13 @@ const getMyProfile = (req,res)=>{
 
         return res.status(200).json({
           full_name:resultJson[0].fullname,
+          first_name:resultJson[0].first_name,
+          last_name:resultJson[0].last_name,
           email:resultJson[0].email,
+          phone:resultJson[0].phone,
+          github:resultJson[0].github,
+          portfolio:resultJson[0].portfolio,
+          location:resultJson[0].user_location,
           slug:resultJson[0].slug,
           profile_image:`${process.env.MAINS}/uploads/profiles/${resultJson[0].profile_image}`,
           experience:result.rows.map((resultJson)=>{
@@ -241,7 +247,8 @@ const getMyProfile = (req,res)=>{
               "end":resultJson.end_date
             }
   
-          })
+          }),
+          
   
           //result: result.rows,
         });

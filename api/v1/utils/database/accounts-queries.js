@@ -21,7 +21,7 @@ const updateExperience =
 const changeRole = "UPDATE public.users SET role=$1 WHERE email=$2";
 
 const getMyProfile =
-  " select users.id, first_name ||' '|| last_name as fullname, email, slug, profile_image, position, description, company, location, start_date, end_date from users LEFT JOIN experience ON users.id = experience.user_id WHERE user_id = $1 ORDER BY start_date ASC ";
+  " select users.id, first_name ||' '|| last_name as fullname, first_name, last_name, email, phone, github, portfolio, users.location as user_location,  slug, profile_image, position, description, company, experience.location, start_date, end_date from users LEFT JOIN experience ON users.id = experience.user_id WHERE user_id = $1 ORDER BY start_date ASC ";
 
 const updateProfile = "UPDATE users SET first_name=$1, last_name=$2 WHERE id=$3;"
 
