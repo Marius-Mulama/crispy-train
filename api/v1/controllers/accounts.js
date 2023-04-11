@@ -21,6 +21,11 @@ const updateProfile = (req, res) => {
   const user_id = getUserId(req.headers.authorization.split(" ")[1]);
   const first_name = req.body.firstname;
   const last_name = req.body.lastname;
+  const phone = req.body.phone.phone;
+  const github = req.body.github;
+  const portfolio = req.body.portfolio;
+  const location = req.body.location;
+
 
   if(!first_name.trim()){
     return res.status(401).json({
@@ -31,7 +36,7 @@ const updateProfile = (req, res) => {
 
 
   pool.query(queries.updateProfile,
-    [first_name, last_name, user_id],
+    [first_name, last_name, phone, github, portfolio, location, user_id],
     (error,result)=>{
       if (error) {
         let infoMessage = "Error Occured";
