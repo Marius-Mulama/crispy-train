@@ -49,6 +49,13 @@ const updateProfile = (req, res) => {
         });
       }
 
+      if(result.rowCount <1){
+        return res.status(418).json({
+          message: "Non Existent User but correct auth (How??)",
+          result: result,
+        });
+      }
+
       return res.status(201).json({
         message: "Profile Updated Sucessfully",
         result: result,
