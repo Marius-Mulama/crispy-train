@@ -1,7 +1,9 @@
+const pool = require("../utils/database/db-connection");
+const queries = require("../utils/database/jobs-queries");
 
 const getOpenJobs = (req,res)=>{
     return res.status(200).json({
-        message:"Get All Open Jobs"
+        message:"Get All Open Jobs 12234"
     })
 }
 
@@ -12,9 +14,16 @@ const getJobsByCompany = (req,res)=>{
 }
 
 const createJob = (req,res)=>{
-    return res.status(200).json({
-        message:"Create Job"
-    })
+    const companyId = 1;
+    //title, description, deadline, skills,company_id, posted_by
+
+    const title = req.body.title;
+    const description = req.body.description;
+    const deadline = req.body.deadline;
+    const skills = req.body.skills;
+    const posted_by = req.body.posted_by;
+    
+   
 }
 
 
